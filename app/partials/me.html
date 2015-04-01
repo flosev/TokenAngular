@@ -1,0 +1,22 @@
+<div class="row" data-ng-controller="MeCtrl">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <strong>User Details</strong>
+            </div>
+            <div class="panel-body">
+               <!-- <p>{{myDetails.email}}</p>
+                <p>{{myDetails.data.password}}</p>
+                <p>{{myDetails.data.token}}</p>
+                <p>{{myDetails}}</p>
+                <p>{{myDetails.data}}</p>
+                <p>{{myDetails.email}}</p>-->
+                <p>{{myDetails}}</p>
+                <ul>
+                    <li ng-repeat="token in myDetails">{{token}}</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

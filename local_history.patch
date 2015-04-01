@@ -1,0 +1,16 @@
+Index: app/scripts/controllers.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/scripts/controllers.js	(revision )
++++ app/scripts/controllers.js	(revision )
+@@ -16,7 +16,7 @@
+                     alert(res.data)    
+                 } else {
+                     /*$localStorage.token = res.data.token;*/
+-                    $localStorage[token+"_token"] = res.data.token;
++                    $localStorage.token = res.data.token;
+ 
+                     //Error: $localStorage.setItem is not a function
+                     //$localStorage.setItem('token' , res.data.token);*/
