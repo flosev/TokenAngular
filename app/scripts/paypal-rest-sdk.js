@@ -1,8 +1,8 @@
 /* Copyright 2015 PayPal */
 "use strict";
 
-var configuration = require('./configure');
-var api = require('./api');
+//var configuration = require('./configure');
+//var api = require('./api');
 
 module.exports = function () {
 
