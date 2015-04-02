@@ -1,7 +1,7 @@
 /* Copyright 2015 PayPal */
 "use strict";
 angularRestfulAuth
-    .service('client', ['$http', '$https', 'configure', function($http, $https, configure) {
+    .service('client', ['$http',  'configure', function($http,  configure) {
 
 /*var http = require('http');
 var https = require('https');
@@ -18,7 +18,7 @@ var configuration = require('./lib/configure');*/
  * @param  {Function} cb                 [description]
  */
 this.invoke = function invoke(http_method, path, data, http_options_param, cb) {
-    var client = (http_options_param.schema === 'http') ? http : https;
+    //var client = (http_options_param.schema === 'http') ? http : https;
 
     var request_data = data;
 
@@ -65,7 +65,7 @@ this.invoke = function invoke(http_method, path, data, http_options_param, cb) {
         http_options.headers['User-Agent'] = configuration.userAgent;
     }
 
-    var req = client.request(http_options);
+    var req = $http.request(http_options);
 
     req.on('error', function (e) {
         console.log('problem with request: ' + e.message);

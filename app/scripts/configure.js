@@ -4,7 +4,7 @@
 angularRestfulAuth
     .service('configure', function(){
 
-    this.sdkVersion = require('/../package').version;
+    this.sdkVersion =  "1.5.1";
     this.userAgent = 'PayPalSDK/PayPal-node-SDK ';
 
         this.default_options = {

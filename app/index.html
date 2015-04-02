@@ -45,7 +45,7 @@
                 <ul class="nav navbar-nav">
                     <li><a ng-href="#/">Home</a></li>
                     <li data-ng-show="token"><a ng-href="#/me">Show Users</a></li>
-                    <li><a ng-href="#/signin">Signin</a></li>
+                    <li><a ng-href="#/list">list</a></li>
                     <li data-ng-hide="token"><a ng-href="#/signup">Signup</a></li>
                     <li data-ng-show="token"><a ng-click="logout()">Logout</a></li>
 
@@ -70,6 +70,7 @@
     <script src="/scripts/client.js"></script>
     <script src="/scripts/utils.js"></script>
     <script src="/scripts/api.js"></script>
+    <script src="/scripts/generate.js"></script>
     <!--<script src="/scripts/paypal-rest-sdk.js"></script>-->
     <script src="/scripts/resources/payment.js"></script>
 

@@ -4,15 +4,22 @@
 
 //angular.module('angularRestfulAuth')
 angularRestfulAuth
-    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'api', function($rootScope, $scope, $location, $localStorage, api) {
-        function mixin(destObject, operations) {
-            operations.forEach(function (property) {
-                destObject[property] = restFunctions[property];
-            });
-            return destObject;
-        }
+    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'generate', function($rootScope, $scope, $location, $localStorage, generate) {
 
-        var restFunctions = {
+        var mode = 'sandbox'; //sandbox or live
+        var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
+        var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+        var listPayment = {
+            'count': '1',
+            'start_index': '1'
+        };
+
+
+
+
+
+
+       /* var restFunctions = {
             create: function create(data, config, cb) {
                 api.executeHttp('POST', this.baseURL, data, config, cb);
             },
@@ -21,31 +28,18 @@ angularRestfulAuth
             },
             list: function list(data, config, cb) {
 
-                paypal.configure({
-                    'mode': 'sandbox', //sandbox or live
-                    'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
-                    'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
-                });
 
-                var listPayment = {
-                    'count': '1',
-                    'start_index': '1'
-                };
-
-                paypal.payment.list(listPayment, function (error, payment) {
-                    if (error) {
-                        throw error;
-                    } else {
-                        console.log("List Payments Response");
-                        console.log(JSON.stringify(payment));
-                    }
-                });
+                    var baseURL = '/v1/payments/payment/';
+                    var operations = ['create', 'get', 'list'];
 
                 if (typeof data === 'function') {
                     config = data;
                     data = {};
                 }
                 api.executeHttp('GET', this.baseURL, data, config, cb);
+
+                console.log("List Payments Response");
+                console.log(JSON.stringify(payment));
             },
             del: function del(id, config, cb) {
                 api.executeHttp('DELETE', this.baseURL + id, {}, config, cb);
@@ -66,8 +60,27 @@ angularRestfulAuth
             cancel: function cancel(id, data, config, cb) {
                 api.executeHttp('POST', this.baseURL + id + '/cancel', data, config, cb);
             }
+        };*/
+        $scope.list = function() {
+            var listPayment = {
+                'count': '1',
+                'start_index': '1',
+                'mode': 'sandbox', //sandbox or live
+                'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+                'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM',
+            baseURL : '/v1/payments/payment/',
+            operations : ['create', 'get', 'list']
+                }
+            generate.list(listPayment, function (error, payment) {
+                if (error) {
+                    throw error;
+                } else {
+                    console.log("List Payments Response");
+                    console.log(JSON.stringify(payment));
+                }
+            })
         };
-       /* $scope.signin = function() {
+        /*$scope.signin = function() {
             var formData = {
                 'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
                 'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
@@ -121,80 +134,39 @@ angularRestfulAuth
             }, function() {
                 alert("Failed to logout!");
             });
-        };
-        $scope.token = $localStorage.token;*/
+        };*/
+        $scope.token = $localStorage.token;
 
     }])
 
-.controller('MeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main', function($rootScope, $scope, $location,$localStorage, Main) {
+.controller('MeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'generate', function($rootScope, $scope, $location,$localStorage, generate) {
+        var listPayment = {
+            'count': '1',
+            'start_index': '1',
+            'mode': 'sandbox', //sandbox or live
+            'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+            'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM',
+            baseURL : '/v1/payments/payment/',
+            operations : ['create', 'get', 'list']
+        }
+        generate.list(listPayment, function (error, payment) {
+            if (error) {
+                throw error;
+            } else {
+                $scope.myDetails = $localStorage.users;
+                console.log("List Payments Response");
+                console.log(JSON.stringify(payment));
+            }
+        })
 
-        Main.me(function(res) {
+
+       /* Main.me(function(res) {
             //$scope.myDetails = res.data;
             $scope.myDetails = $localStorage.users;
             //$scope.myDetails = localStorage.getItem('fedor');
-            //$scope.myDetails = localStorage.getItem('cart');
-
-
-
-            //$scope.myDetails = allData;
-
-
-
-
-             //отработало
-               /* var item = localStorage.getItem('fedor');
-            $scope.myDetails =  parseValue(item);
-
-             function parseValue(res) {
-            var val;
-            try {
-                val = angular.fromJson(res);
-                if (typeof val === 'undefined') {
-                    val = res;
-                }
-                if (val === 'true') {
-                    val = true;
-                }
-                if (val === 'false') {
-                    val = false;
-                }
-                if ($window.parseFloat(val) === val && !angular.isObject(val)) {
-                    val = $window.parseFloat(val);
-                }
-            } catch (e) {
-                val = res;
-            }
-            return val;
-        };
-*/
-
-
-            /*var prefix = self.prefix;
-            if (prefix.substr(-1) !== '.') {
-                prefix = !!prefix ? prefix + '.' : '';
-            }
-            var deriveQualifiedKey = function(key) {
-                return prefix + key;
-            };
-            var getFromLocalStorage = function (key) {
-
-
-                var item = webStorage ? webStorage.getItem(deriveQualifiedKey(key)) : null;
-                // angular.toJson will convert null to 'null', so a proper conversion is needed
-                // FIXME not a perfect solution, since a valid 'null' string can't be stored
-                if (!item || item === 'null') {
-                    return null;
-                }
-
-                if (item.charAt(0) === "{" || item.charAt(0) === "[" || isStringNumber(item)) {
-                    return fromJson(item);
-                }
-
-                return item;
-            };*/
-        }, function() {
+                   }, function() {
             $rootScope.error = 'Failed to fetch details';
-        })
+        })*/
 }]);
 
 

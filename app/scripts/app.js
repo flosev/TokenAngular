@@ -24,6 +24,10 @@ var angularRestfulAuth = angular.module('angularRestfulAuth', [
             templateUrl: 'partials/me.html',
             controller: 'HomeCtrl'
         }).
+        when('/list', {
+            templateUrl: 'partials/me.html',
+            controller: 'HomeCtrl'
+        }).
         otherwise({
             redirectTo: '/'
         });
